@@ -78,6 +78,14 @@ License
 The ``slugid`` library is released on the MPL 2.0 license, see the ``LICENSE``
 for complete license.
 
+Testing
+-------
+
+.. code-block:: bash
+
+    pip install -r requirements.txt
+    tox
+
 Publishing
 ----------
 To republish this library to pypi.python.org, update the version number in
@@ -85,9 +93,13 @@ To republish this library to pypi.python.org, update the version number in
 
 .. code-block:: bash
 
-    pip install twine
+    # delete stale versions
     rm -rf dist
+
+    # build source package
     python setup.py sdist
+
+    # publish it
     twine upload -s dist/*
 
 
