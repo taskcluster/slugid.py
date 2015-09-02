@@ -36,7 +36,7 @@ Usage:
 """
 
 __title__ = 'slugid'
-__version__ = '1.0.3'
+__version__ = '1.0.4'
 __author__ = 'Peter Moore'
 __license__ = 'MPL 2.0'
 

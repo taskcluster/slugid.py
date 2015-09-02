@@ -83,9 +83,12 @@ Publishing
 To republish this library to pypi.python.org, update the version number in
 ``slugid/__init__.py``, commit it, push to github, and then run:
 
-.. code-block:: python
+.. code-block:: bash
 
-    python setup.py sdist upload --sign
+    pip install twine
+    rm -rf dist
+    python setup.py sdist
+    twine upload -s dist/*
 
 
 .. _RFC 4648 sec. 5: http://tools.ietf.org/html/rfc4648#section-5

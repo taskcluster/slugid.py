@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
-import os
 import re
-import sys
 
 from codecs import open
 
@@ -10,10 +8,6 @@ try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
-
-if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist upload --sign')
-    sys.exit()
 
 packages = [
     'slugid',
