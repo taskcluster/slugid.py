@@ -74,8 +74,8 @@ Encode / Decode
 
 License
 -------
-The ``slugid`` library is released on the MIT license, see the ``LICENSE`` for
-complete license.
+The ``slugid`` library is released on the MLP 2.0 license, see the ``LICENSE``
+for complete license.
 
 Publishing
 ----------
@@ -93,7 +93,7 @@ To republish this library to pypi.python.org, update the version number in
    :target: http://travis-ci.org/taskcluster/slugid.py
 .. |Coverage Status| image:: https://coveralls.io/repos/taskcluster/slugid.py/badge.svg?branch=master&service=github
    :target: https://coveralls.io/github/taskcluster/slugid.py?branch=master
-.. |License| image:: https://img.shields.io/badge/license-MIT-orange.svg
+.. |License| image:: https://img.shields.io/badge/license-MLP%202.0-orange.svg
    :target: https://github.com/taskcluster/slugid.py/blob/master/LICENSE
 .. |pypi Version| image:: https://img.shields.io/pypi/v/slugid.svg
    :target: https://pypi.python.org/pypi/slugid
