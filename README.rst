@@ -44,8 +44,9 @@ Generated slugs take the form ``[A-Za-z0-9_-]{22}``, or more precisely:
 - ``slugid.nice()`` slugs conform to
   ``[A-Za-f][A-Za-z0-9_-]{7}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]``
 
-RFC 4122 defines the setting of 6 bits of the v4 UUID which determines these
-regular expressions.
+RFC 4122 defines the setting of 6 bits of the v4 UUID which implies v4 slugs
+provide 128 - 6 = 122 bits entropy. Due to the (un)setting of the first bit
+of "nice" slugs, nice slugs provide therefore 121 bits entropy.
 
 .. code-block:: python
 
@@ -74,7 +75,7 @@ Encode / Decode
 
 License
 -------
-The ``slugid`` library is released on the MLP 2.0 license, see the ``LICENSE``
+The ``slugid`` library is released on the MPL 2.0 license, see the ``LICENSE``
 for complete license.
 
 Publishing
@@ -93,7 +94,7 @@ To republish this library to pypi.python.org, update the version number in
    :target: http://travis-ci.org/taskcluster/slugid.py
 .. |Coverage Status| image:: https://coveralls.io/repos/taskcluster/slugid.py/badge.svg?branch=master&service=github
    :target: https://coveralls.io/github/taskcluster/slugid.py?branch=master
-.. |License| image:: https://img.shields.io/badge/license-MLP%202.0-orange.svg
+.. |License| image:: https://img.shields.io/badge/license-MPL%202.0-orange.svg
    :target: https://github.com/taskcluster/slugid.py/blob/master/LICENSE
 .. |pypi Version| image:: https://img.shields.io/pypi/v/slugid.svg
    :target: https://pypi.python.org/pypi/slugid
