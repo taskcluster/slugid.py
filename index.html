@@ -76,20 +76,18 @@ since this would arise only as an intermittent issue (one time in 64).</p>
 provide 128 - 6 = 122 bits entropy. Due to the (un)setting of the first bit
 of "nice" slugs, nice slugs provide therefore 121 bits entropy.</p>
 
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
 <div class="highlight highlight-python"><pre><span class="pl-k">import</span> slugid
 
 <span class="pl-c"># Generate "nice" URL-safe base64 encoded UUID version 4 (random)</span>
-slug <span class="pl-k">=</span> slugid.nice()  <span class="pl-c"># a8_YezW8T7e1jLxG7evy-A</span></pre></div>
+slug <span class="pl-k">=</span> slugid.nice()  <span class="pl-c"># a8_YezW8T7e1jLxG7evy-A</span>
 
-<h2>
-<a id="encode--decode" class="anchor" href="#encode--decode" aria-hidden="true"><span class="octicon octicon-link"></span></a>Encode / Decode</h2>
+<span class="pl-c"># Alternative, if slugs will not be used as command line parameters</span>
+slug <span class="pl-k">=</span> slugid.v4()    <span class="pl-c"># -9OpXaCORAaFh4sJRk7PUA</span>
 
-<div class="highlight highlight-python"><pre><span class="pl-k">import</span> slugid
-
-<span class="pl-c"># Generate URL-safe base64 encoded UUID version 4 (random)</span>
-slug <span class="pl-k">=</span> slugid.v4()
-
-<span class="pl-c"># Get UUID on the form xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx</span>
+<span class="pl-c"># Get python uuid.UUID object</span>
 uuid <span class="pl-k">=</span> slugid.decode(slug)
 
 <span class="pl-c"># Compress to slug again</span>
