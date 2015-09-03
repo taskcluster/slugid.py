@@ -13,11 +13,11 @@ Slugs are url-safe base64 encoded v4 uuids, stripped of base64 ``=`` padding.
 There are two methods for generating slugs - ``slugid.v4()`` and
 ``slugid.nice()``.
 
-The ``slugid.v4()`` method returns a slug from a randomly generated v4 uuid.
-The ``slugid.nice()`` method returns a v4 slug which conforms to a set of
-"nice" properties. At the moment the only "nice" property is that the slug
-starts with ``[A-Za-f]``, which in turn implies that the first (most
-significant) bit of its associated uuid is set to 0.
+- The ``slugid.v4()`` method returns a slug from a randomly generated v4 uuid.
+- The ``slugid.nice()`` method returns a v4 slug which conforms to a set of
+  "nice" properties. At the moment the only "nice" property is that the slug
+  starts with ``[A-Za-f]``, which in turn implies that the first (most
+  significant) bit of its associated uuid is set to 0.
 
 The purpose of the ``slugid.nice()`` method is to support having slugids which
 can be used in more contexts safely. Regular slugids can safely be used in
