@@ -71,11 +71,10 @@ Usage
 
 RNG Characteristics
 -------------------
-UUID generation is performed by the built-in python [uuid
-library](https://docs.python.org/2/library/uuid.html) which does not document
-its randomness, but falls back to system uuid-generation libraries where
-available, then urandom, then random. Therefore generated slugids match these
-rng characteristics.
+UUID generation is performed by the built-in python `uuid library`_ which does
+not document its randomness, but falls back to system uuid-generation libraries
+where available, then urandom, then random. Therefore generated slugids match
+these rng characteristics.
 
 License
 -------
@@ -108,6 +107,7 @@ To republish this library to pypi.python.org, update the version number in
 
 
 .. _RFC 4648 sec. 5: http://tools.ietf.org/html/rfc4648#section-5
+.. _uuid library: https://docs.python.org/2/library/uuid.html
 
 .. |Build Status| image:: https://travis-ci.org/taskcluster/slugid.py.svg?branch=master
    :target: http://travis-ci.org/taskcluster/slugid.py
