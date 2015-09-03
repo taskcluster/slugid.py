@@ -48,6 +48,10 @@ RFC 4122 defines the setting of 6 bits of the v4 UUID which implies v4 slugs
 provide 128 - 6 = 122 bits entropy. Due to the (un)setting of the first bit
 of "nice" slugs, nice slugs provide therefore 121 bits entropy.
 
+
+Usage
+-----
+
 .. code-block:: python
 
     import slugid
@@ -55,18 +59,10 @@ of "nice" slugs, nice slugs provide therefore 121 bits entropy.
     # Generate "nice" URL-safe base64 encoded UUID version 4 (random)
     slug = slugid.nice()  # a8_YezW8T7e1jLxG7evy-A
 
+    # Alternative, if slugs will not be used as command line parameters
+    slug = slugid.v4()    # -9OpXaCORAaFh4sJRk7PUA
 
-Encode / Decode
----------------
-
-.. code-block:: python
-
-    import slugid
-
-    # Generate URL-safe base64 encoded UUID version 4 (random)
-    slug = slugid.v4()
-
-    # Get UUID on the form xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
+    # Get python uuid.UUID object
     uuid = slugid.decode(slug)
 
     # Compress to slug again
