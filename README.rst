@@ -73,6 +73,14 @@ Encode / Decode
     assert(slug == slugid.encode(uuid))
 
 
+RNG Characteristics
+-------------------
+UUID generation is performed by the built-in python [uuid
+library](https://docs.python.org/2/library/uuid.html) which does not document
+its randomness, but falls back to system uuid-generation libraries where
+available, then urandom, then random. Therefore generated slugids match these
+rng characteristics.
+
 License
 -------
 The ``slugid`` library is released on the MPL 2.0 license, see the ``LICENSE``
