@@ -15,59 +15,44 @@ def testEncode():
     # < g  >< E  >< 8  >< _  >< y  >< N  >< _  >< L  >< S  >< w  >< a  >< J  >< -  >< 6  >< 7  >< 6  >< 1  >< e  >< G  >< H  >< V  >< A  >
     uuid_ = uuid.UUID('{804f3fc8-dfcb-4b06-89fb-aefad5e18754}')
     expectedSlug = 'gE8_yN_LSwaJ-6761eGHVA'
-
-    # Encode
     actualSlug = slugid.encode(uuid_)
 
-    # Test that it encoded correctly
     assert expectedSlug == actualSlug, "UUID not correctly encoded into slug: '" + expectedSlug + "' != '" + actualSlug + "'"
 
 
 def testDecode():
     """ Test that we can decode a "non-nice" slug (first bit of uuid is set)
-    that begins with `-` """
+    that begins with `-`"""
     
     # 11111011111011111011111011111011111011111011111001000011111011111011111111111111111111111111111111111111111111111111111111111101....
     # <f ><b ><e ><f ><b ><e ><f ><b ><e ><f ><b ><e ><4 ><3 ><e ><f ><b ><f ><f ><f ><f ><f ><f ><f ><f ><f ><f ><f ><f ><f ><f ><d >
     # < -  >< -  >< -  >< -  >< -  >< -  >< -  >< -  >< Q  >< -  >< -  >< -  >< _  >< _  >< _  >< _  >< _  >< _  >< _  >< _  >< _  >< Q  >
     slug = '--------Q--__________Q'
     expectedUuid = uuid.UUID('{fbefbefb-efbe-43ef-bfff-fffffffffffd}')
-  
-    # Decode
     actualUuid = slugid.decode(slug)
   
-    # Test that it is decoded correctly
     assert expectedUuid == actualUuid, "Slug not correctly decoded into uuid: '" + str(expectedUuid) + "' != '" + str(actualUuid) + "'"
   
 
 def testUuidEncodeDecode():
-    """ Test that 100 v4 uuids are unchanged after encoding and then decoding them"""
+    """ Test that 10000 v4 uuids are unchanged after encoding and then decoding them"""
 
-    for i in range(0, 100):
-        # Generate uuid
-        uuid_ = uuid.uuid4()
+    for i in range(0, 10000):
+        uuid1 = uuid.uuid4()
+        slug = slugid.encode(uuid1)
+        uuid2 = slugid.decode(slug)
 
-        # Encode
-        slug = slugid.encode(uuid_)
-
-        # Test that decode uuid matches original
-        assert slugid.decode(slug) == uuid_, "Encode and decode isn't identity"
+        assert uuid1 == uuid2, "Encode and decode isn't identity: '" + str(uuid1) + "' != '" + str(uuid2) + "'"
 
 
 def testSlugDecodeEncode():
-    """ Test that 100 v4 slugs are unchanged after decoding and then encoding them."""
+    """ Test that 10000 v4 slugs are unchanged after decoding and then encoding them."""
 
-    for i in range(0, 100):
-        # Generate slug
+    for i in range(0, 10000):
         slug1 = slugid.v4()
-
-        # Decode
         uuid_ = slugid.decode(slug1)
-
-        # Encode
         slug2 = slugid.encode(uuid_)
 
-        # Test that decode uuid matches original
         assert slug1 == slug2, "Decode and encode isn't identity"
 
 
@@ -144,7 +129,7 @@ def spreadTest(generator, expected):
     returns matches the array `expected`, where each entry in `expected` is a
     string of all possible characters that should appear in that position in the
     string, at least once in the sample of 64*40 responses from the `generator`
-    function """
+    function"""
     # k is an array which stores which characters were found at which
     # positions. It has one entry per slugid character, therefore 22 entries.
     # Each entry is a dict with a key for each character found, and its value
@@ -178,14 +163,5 @@ def spreadTest(generator, expected):
     assert arraysEqual(expected, actual), "In a large sample of generated slugids, the range of characters found per character position in the sample did not match expected results.\n\nExpected: " + str(expected) + "\n\nActual: " + str(actual)
 
 def arraysEqual(a, b):
-    """ `arraysEqual` checks arrays `a` and `b` for equality"""
-    if a == b:
-        return True
-    if a is None or b is None:
-        return False
-    if len(a) != len(b):
-        return False
-    for i in range (0, len(a)):
-        if a[i] != b[i]:
-            return False
-    return True
+    """ returns True if arrays a and b are equal"""
+    return cmp(a, b) == 0
