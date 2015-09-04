@@ -23,16 +23,16 @@ def testEncode():
 def testDecode():
     """ Test that we can decode a "non-nice" slug (first bit of uuid is set)
     that begins with `-`"""
-    
+
     # 11111011111011111011111011111011111011111011111001000011111011111011111111111111111111111111111111111111111111111111111111111101....
     # <f ><b ><e ><f ><b ><e ><f ><b ><e ><f ><b ><e ><4 ><3 ><e ><f ><b ><f ><f ><f ><f ><f ><f ><f ><f ><f ><f ><f ><f ><f ><f ><d >
     # < -  >< -  >< -  >< -  >< -  >< -  >< -  >< -  >< Q  >< -  >< -  >< -  >< _  >< _  >< _  >< _  >< _  >< _  >< _  >< _  >< _  >< Q  >
     slug = '--------Q--__________Q'
     expectedUuid = uuid.UUID('{fbefbefb-efbe-43ef-bfff-fffffffffffd}')
     actualUuid = slugid.decode(slug)
-  
+
     assert expectedUuid == actualUuid, "Slug not correctly decoded into uuid: '" + str(expectedUuid) + "' != '" + str(actualUuid) + "'"
-  
+
 
 def testUuidEncodeDecode():
     """ Test that 10000 v4 uuids are unchanged after encoding and then decoding them"""
