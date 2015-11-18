@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import re
-
 from codecs import open
 
 try:
