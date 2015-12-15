@@ -1,8 +1,10 @@
 # Licensed under the Mozilla Public Licence 2.0.
 # https://www.mozilla.org/en-US/MPL/2.0
 
+import sys
 import uuid
 import base64
+two = True if sys.version_info.major == 2 else False
 
 def encode(uuid_):
     """
@@ -16,7 +18,10 @@ def decode(slug):
     """
     Returns the uuid.UUID object represented by the given v4 or "nice" slug
     """
-    return uuid.UUID(bytes=base64.urlsafe_b64decode(slug + '==')) # b64 padding
+    if not two and isinstance(slug, bytes):
+      slug = slug.decode('ascii')
+    slug = slug + '=='
+    return uuid.UUID(bytes=base64.urlsafe_b64decode(slug)) # b64 padding
 
 
 def v4():
@@ -38,6 +43,6 @@ def nice():
     Potentially other "nice" properties may be added in future to further
     restrict the range of potential uuids that may be generated.
     """
-    rawBytes = uuid.uuid4().bytes
-    rawBytes = chr(ord(rawBytes[0]) & 0x7f) + rawBytes[1:]  # Ensure slug starts with [A-Za-f]
+    rawBytes = bytearray(uuid.uuid4().bytes)
+    rawBytes[0] = rawBytes[0] & 0x7f;
     return base64.urlsafe_b64encode(rawBytes)[:-2]  # Drop '==' padding
