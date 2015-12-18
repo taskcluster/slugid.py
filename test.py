@@ -167,7 +167,8 @@ def arraysEqual(a, b):
     if len(a) != len(b):
       return False
     for x in range(0, len(a)):
-      if cmp(a[x], b[x]) != 0:
+      # https://docs.python.org/3.0/whatsnew/3.0.html#ordering-comparisons
+      if (a[x] > b[x]) - (a[x] < b[x]) != 0:
         return False
     return True
 
