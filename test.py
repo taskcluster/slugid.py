@@ -160,16 +160,14 @@ def spreadTest(generator, expected):
         # sort for easy comparison
         actual[j] = ''.join(sorted(actual[j]))
 
-    arraysEqual(expected, actual), "In a large sample of generated slugids, the range of characters found per character position in the sample did not match expected results.\n\nExpected: " + str(expected) + "\n\nActual: " + str(actual)
+    assert arraysEqual(expected, actual), "In a large sample of generated slugids, the range of characters found per character position in the sample did not match expected results.\n\nExpected: " + str(expected) + "\n\nActual: " + str(actual)
 
 def arraysEqual(a, b):
     """ returns True if arrays a and b are equal"""
-    assert len(a) == len(b)
-    fails = False
-    msg = []
+    if len(a) != len(b):
+      return False
     for x in range(0, len(a)):
-      if 0!= cmp(a[x], b[x]):
-        fails = True
-        msg.append('Expected: ' + str(a[x]) + ' Actual: ' + str(b[x]))
-    assert not fails, '\n'.join(msg)
+      if cmp(a[x], b[x]) != 0:
+        return False
+    return True
 

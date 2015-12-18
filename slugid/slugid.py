@@ -20,8 +20,8 @@ def decode(slug):
     """
     if not two and isinstance(slug, bytes):
       slug = slug.decode('ascii')
-    slug = slug + '=='
-    return uuid.UUID(bytes=base64.urlsafe_b64decode(slug)) # b64 padding
+    slug = slug + '==' # base64 padding
+    return uuid.UUID(bytes=base64.urlsafe_b64decode(slug))
 
 
 def v4():
@@ -44,5 +44,5 @@ def nice():
     restrict the range of potential uuids that may be generated.
     """
     rawBytes = bytearray(uuid.uuid4().bytes)
-    rawBytes[0] = rawBytes[0] & 0x7f;
+    rawBytes[0] = rawBytes[0] & 0x7f
     return base64.urlsafe_b64encode(rawBytes)[:-2]  # Drop '==' padding
