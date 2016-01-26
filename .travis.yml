@@ -18,7 +18,7 @@ notifications:
     channels:
       # encrpyted string was "irc.mozilla.org#taskcluster-bots"
       - secure: "PX8p5lgNfjyNcY+2D8Z5tx9OIHJpbCR9oiJtCjFe1ttNWob1HBhmixHEQNpIrlIlJRASEWJ8JS83gfAhKeYc+HDsPtvubfF9rpNz5phu3QntTpTim0cSyMQIxMjE0YXD7fU3ne1i9PjW3MNSJ54AvAEMAg5hojjh3zHzz+hQKrB4W+uaBiP/IA+tbb5D1d90thQnjJWlhE0quKPipCqL5RbkeGGRHNjyb57U2PatBj+E5FBnFzHeW5v93TlYcLMsEuGaoSFaMj+ew2keM0jwV2CCOlF0NVcIUyVyfadA+1N+3gVgfWu2r0RQukMR4KuwPqBD2ybBG/STMtHk6ojjqUliQlxCeaF3XKML/uoKA2Ku+J1TifBH5nwX2KkFXyl+Lf+M20T5cIb8e2pMSFSSazZM4rw55jPIIoFDjVyuweXi6fpqOEMV5NMepzkUrLxMyRHzNGl5sYg7OOlrGt5j235QOtySg1y1ZRKSnYsbWIlA1BbfKE0CXe+J7QHTPylQTDedUMA3v6CcdccxTSe9Ud7p4qMRAZwvrzl0RK1Y63WFTCz7VkHGNOTPsEgC7KM6qtifAIBgOqRYr8Arkuc4+sDAGSKc6gwDIXrUplXYYbNfTftl/pNOl0SqvAezlWaLEEVE/JhiOgCA7+DD1dpHclBkcwSLovEOOlN5lk3fpfw="
-    on_success: always
+    on_success: change
     on_failure: always
     template:
       - "\x02%{repository}\x0314#%{build_number}\x03\x02 (%{branch} - %{commit} : %{author}): \x02\x0312%{message}\x02\x03"
