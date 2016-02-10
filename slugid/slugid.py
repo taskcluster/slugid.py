@@ -5,12 +5,13 @@ import sys
 import uuid
 import base64
 
+
 def encode(uuid_):
     """
-	Returns the given uuid.UUID object as a 22 character slug. This can be a
-	regular v4 slug or a "nice" slug.
+    Returns the given uuid.UUID object as a 22 character slug. This can be a
+    regular v4 slug or a "nice" slug.
     """
-    return base64.urlsafe_b64encode(uuid_.bytes)[:-2] # Drop '==' padding
+    return base64.urlsafe_b64encode(uuid_.bytes)[:-2]  # Drop '==' padding
 
 
 def decode(slug):
@@ -19,7 +20,7 @@ def decode(slug):
     """
     if sys.version_info.major != 2 and isinstance(slug, bytes):
         slug = slug.decode('ascii')
-    slug = slug + '==' # base64 padding
+    slug = slug + '=='  # base64 padding
     return uuid.UUID(bytes=base64.urlsafe_b64decode(slug))
 
 
@@ -27,7 +28,7 @@ def v4():
     """
     Returns a randomly generated uuid v4 compliant slug
     """
-    return base64.urlsafe_b64encode(uuid.uuid4().bytes)[:-2] # Drop '==' padding
+    return base64.urlsafe_b64encode(uuid.uuid4().bytes)[:-2]  # Drop '==' padding
 
 
 def nice():

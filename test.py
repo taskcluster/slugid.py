@@ -162,13 +162,13 @@ def spreadTest(generator, expected):
 
     assert arraysEqual(expected, actual), "In a large sample of generated slugids, the range of characters found per character position in the sample did not match expected results.\n\nExpected: " + str(expected) + "\n\nActual: " + str(actual)
 
+
 def arraysEqual(a, b):
     """ returns True if arrays a and b are equal"""
     if len(a) != len(b):
-      return False
-    for x in range(0, len(a)):
-      # https://docs.python.org/3.0/whatsnew/3.0.html#ordering-comparisons
-      if (a[x] > b[x]) - (a[x] < b[x]) != 0:
         return False
+    for x in range(0, len(a)):
+        # https://docs.python.org/3.0/whatsnew/3.0.html#ordering-comparisons
+        if (a[x] > b[x]) - (a[x] < b[x]) != 0:
+            return False
     return True
-
