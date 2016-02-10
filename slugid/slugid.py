@@ -4,7 +4,6 @@
 import sys
 import uuid
 import base64
-two = True if sys.version_info.major == 2 else False
 
 def encode(uuid_):
     """
@@ -18,8 +17,8 @@ def decode(slug):
     """
     Returns the uuid.UUID object represented by the given v4 or "nice" slug
     """
-    if not two and isinstance(slug, bytes):
-      slug = slug.decode('ascii')
+    if sys.version_info.major != 2 and isinstance(slug, bytes):
+        slug = slug.decode('ascii')
     slug = slug + '==' # base64 padding
     return uuid.UUID(bytes=base64.urlsafe_b64decode(slug))
 
@@ -44,5 +43,5 @@ def nice():
     restrict the range of potential uuids that may be generated.
     """
     rawBytes = bytearray(uuid.uuid4().bytes)
-    rawBytes[0] = rawBytes[0] & 0x7f
+    rawBytes[0] = rawBytes[0] & 0x7f  # Ensure slug starts with [A-Za-f]
     return base64.urlsafe_b64encode(rawBytes)[:-2]  # Drop '==' padding
