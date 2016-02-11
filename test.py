@@ -94,15 +94,15 @@ def testSpreadNice():
     => $E in {C, G, K, O, S, W, a, e, i, m, q, u, y, 2, 6, -} (0bxxxx10)
     => $F in {A, Q, g, w} (0bxx0000)"""
 
-    charsAll = ''.join(sorted('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'))
+    charsAll = bytearray(sorted(b'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'))
     # 0 - 31: 0b0xxxxx
-    charsC = ''.join(sorted('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef'))
+    charsC = bytearray(sorted(b'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef'))
     # 16, 17, 18, 19: 0b0100xx
-    charsD = ''.join(sorted('QRST'))
+    charsD = bytearray(sorted(b'QRST'))
     # 2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62: 0bxxxx10
-    charsE = ''.join(sorted('CGKOSWaeimquy26-'))
+    charsE = bytearray(sorted(b'CGKOSWaeimquy26-'))
     # 0, 16, 32, 48: 0bxx0000
-    charsF = ''.join(sorted('AQgw'))
+    charsF = bytearray(sorted(b'AQgw'))
     expected = [charsC, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsD, charsAll, charsE, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsF]
     spreadTest(slugid.nice, expected)
 
@@ -112,13 +112,13 @@ def testSpreadV4():
     slugid.nice(). The only difference is that a v4() slug can start with any of
     the base64 characters since the first six bits of the uuid are random."""
 
-    charsAll = ''.join(sorted('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'))
+    charsAll = bytearray(sorted(b'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'))
     # 16, 17, 18, 19: 0b0100xx
-    charsD = ''.join(sorted('QRST'))
+    charsD = bytearray(sorted(b'QRST'))
     # 2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62: 0bxxxx10
-    charsE = ''.join(sorted('CGKOSWaeimquy26-'))
+    charsE = bytearray(sorted(b'CGKOSWaeimquy26-'))
     # 0, 16, 32, 48: 0bxx0000
-    charsF = ''.join(sorted('AQgw'))
+    charsF = bytearray(sorted(b'AQgw'))
     expected = [charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsD, charsAll, charsE, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsF]
     spreadTest(slugid.v4, expected)
 
@@ -153,12 +153,13 @@ def spreadTest(generator, expected):
     # Compose results into an array `actual`, for comparison with `expected`
     actual = []
     for j in range(0, len(k)):
-        actual.append('')
+        actual.append(b'')
+        blocks = bytearray()
         for a in k[j].keys():
             if k[j][a] > 0:
-                actual[j] += a
+                blocks.append(a)
         # sort for easy comparison
-        actual[j] = ''.join(sorted(actual[j]))
+        actual[j] = bytearray(sorted(blocks))
 
     assert arraysEqual(expected, actual), "In a large sample of generated slugids, the range of characters found per character position in the sample did not match expected results.\n\nExpected: " + str(expected) + "\n\nActual: " + str(actual)
 
