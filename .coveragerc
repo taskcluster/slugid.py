@@ -1,0 +1,5 @@
+; .coveragerc to control coverage.py
+[run]
+; This isn't about git branches, this is about execution branches, see
+; http://coverage.readthedocs.org/en/coverage-4.0.3/branch.html#branch
+branch = True
