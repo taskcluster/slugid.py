@@ -14,10 +14,11 @@ def testEncode():
     # <8 ><0 ><4 ><f ><3 ><f ><c ><8 ><d ><f ><c ><b ><4 ><b ><0 ><6 ><8 ><9 ><f ><b ><a ><e ><f ><a ><d ><5 ><e ><1 ><8 ><7 ><5 ><4 >
     # < g  >< E  >< 8  >< _  >< y  >< N  >< _  >< L  >< S  >< w  >< a  >< J  >< -  >< 6  >< 7  >< 6  >< 1  >< e  >< G  >< H  >< V  >< A  >
     uuid_ = uuid.UUID('{804f3fc8-dfcb-4b06-89fb-aefad5e18754}')
-    expectedSlug = 'gE8_yN_LSwaJ-6761eGHVA'
+    expectedSlug = b'gE8_yN_LSwaJ-6761eGHVA'
     actualSlug = slugid.encode(uuid_)
 
-    assert expectedSlug == actualSlug, "UUID not correctly encoded into slug: '" + expectedSlug + "' != '" + actualSlug + "'"
+    assert expectedSlug == actualSlug, "UUID not correctly encoded into slug: '" + \
+        expectedSlug + "' != '" + actualSlug + "'"
 
 
 def testDecode():
@@ -31,7 +32,8 @@ def testDecode():
     expectedUuid = uuid.UUID('{fbefbefb-efbe-43ef-bfff-fffffffffffd}')
     actualUuid = slugid.decode(slug)
 
-    assert expectedUuid == actualUuid, "Slug not correctly decoded into uuid: '" + str(expectedUuid) + "' != '" + str(actualUuid) + "'"
+    assert expectedUuid == actualUuid, "Slug not correctly decoded into uuid: '" + \
+        str(expectedUuid) + "' != '" + str(actualUuid) + "'"
 
 
 def testUuidEncodeDecode():
@@ -94,16 +96,22 @@ def testSpreadNice():
     => $E in {C, G, K, O, S, W, a, e, i, m, q, u, y, 2, 6, -} (0bxxxx10)
     => $F in {A, Q, g, w} (0bxx0000)"""
 
-    charsAll = ''.join(sorted('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'))
+    charsAll = bytearray(
+        sorted(b'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_')
+    )
     # 0 - 31: 0b0xxxxx
-    charsC = ''.join(sorted('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef'))
+    charsC = bytearray(sorted(b'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef'))
     # 16, 17, 18, 19: 0b0100xx
-    charsD = ''.join(sorted('QRST'))
+    charsD = bytearray(sorted(b'QRST'))
     # 2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62: 0bxxxx10
-    charsE = ''.join(sorted('CGKOSWaeimquy26-'))
+    charsE = bytearray(sorted(b'CGKOSWaeimquy26-'))
     # 0, 16, 32, 48: 0bxx0000
-    charsF = ''.join(sorted('AQgw'))
-    expected = [charsC, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsD, charsAll, charsE, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsF]
+    charsF = bytearray(sorted(b'AQgw'))
+    expected = [
+        charsC, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll,
+        charsD, charsAll, charsE, charsAll, charsAll, charsAll, charsAll, charsAll,
+        charsAll, charsAll, charsAll, charsAll, charsAll, charsF
+    ]
     spreadTest(slugid.nice, expected)
 
 
@@ -112,14 +120,20 @@ def testSpreadV4():
     slugid.nice(). The only difference is that a v4() slug can start with any of
     the base64 characters since the first six bits of the uuid are random."""
 
-    charsAll = ''.join(sorted('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'))
+    charsAll = bytearray(
+        sorted(b'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_')
+    )
     # 16, 17, 18, 19: 0b0100xx
-    charsD = ''.join(sorted('QRST'))
+    charsD = bytearray(sorted(b'QRST'))
     # 2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62: 0bxxxx10
-    charsE = ''.join(sorted('CGKOSWaeimquy26-'))
+    charsE = bytearray(sorted(b'CGKOSWaeimquy26-'))
     # 0, 16, 32, 48: 0bxx0000
-    charsF = ''.join(sorted('AQgw'))
-    expected = [charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsD, charsAll, charsE, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsF]
+    charsF = bytearray(sorted(b'AQgw'))
+    expected = [
+        charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll, charsAll,
+        charsD, charsAll, charsE, charsAll, charsAll, charsAll, charsAll, charsAll,
+        charsAll, charsAll, charsAll, charsAll, charsAll, charsF
+    ]
     spreadTest(slugid.v4, expected)
 
 
@@ -153,15 +167,26 @@ def spreadTest(generator, expected):
     # Compose results into an array `actual`, for comparison with `expected`
     actual = []
     for j in range(0, len(k)):
-        actual.append('')
+        actual.append(b'')
+        blocks = bytearray()
         for a in k[j].keys():
             if k[j][a] > 0:
-                actual[j] += a
+                blocks.append(a)
         # sort for easy comparison
-        actual[j] = ''.join(sorted(actual[j]))
+        actual[j] = bytearray(sorted(blocks))
 
-    assert arraysEqual(expected, actual), "In a large sample of generated slugids, the range of characters found per character position in the sample did not match expected results.\n\nExpected: " + str(expected) + "\n\nActual: " + str(actual)
+    assert arraysEqual(expected, actual), \
+        "In a large sample of generated slugids, the range of characters found " \
+        "per character position in the sample did not match expected results.\n\n" \
+        "Expected: " + str(expected) + "\n\nActual: " + str(actual)
+
 
 def arraysEqual(a, b):
     """ returns True if arrays a and b are equal"""
-    return cmp(a, b) == 0
+    if len(a) != len(b):
+        return False
+    for x in range(0, len(a)):
+        # https://docs.python.org/3.0/whatsnew/3.0.html#ordering-comparisons
+        if (a[x] > b[x]) - (a[x] < b[x]) != 0:
+            return False
+    return True
