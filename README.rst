@@ -242,11 +242,13 @@ To republish this library to pypi.python.org, update the version number in
 
 .. code-block:: bash
 
-    # delete stale versions
-    rm -rf dist
+    pip install -U twine setuptools wheel
 
-    # build source package
-    python setup.py sdist
+    # delete stale versions
+    rm -rf dist/ build/
+
+    # build source package and wheel
+    python setup.py sdist bdist_wheel
 
     # publish it
     twine upload -s dist/*
