@@ -45,6 +45,9 @@ Generated slugs take the form ``[A-Za-z0-9_-]{22}``, or more precisely:
 - ``slugid.nice()`` slugs conform to
   ``[A-Za-f][A-Za-z0-9_-]{7}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]``
 
+Slugs are generated with the interpreter's default string type.  On Python 2,
+these are byte strings.  On Python 3, these are unicode strings.
+
 RFC 4122 defines the setting of six bits of the v4 UUID which implies v4 slugs
 provide 128 - 6 = 122 bits entropy. Due to the (un)setting of the first bit
 of "nice" slugs, nice slugs provide therefore 121 bits entropy.

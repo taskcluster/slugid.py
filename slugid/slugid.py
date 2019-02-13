@@ -15,7 +15,10 @@ def encode(uuid_):
 
 
 def _convert_bytes_to_slug(bytes_):
-    return base64.urlsafe_b64encode(bytes_)[:-2]  # Drop '==' padding
+    slug = base64.urlsafe_b64encode(bytes_)[:-2]  # Drop '==' padding
+    if sys.version_info.major != 2 and isinstance(slug, bytes):
+        slug = slug.decode('utf-8')
+    return slug
 
 
 def decode(slug):

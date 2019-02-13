@@ -14,7 +14,7 @@ def testEncode():
     # <8 ><0 ><4 ><f ><3 ><f ><c ><8 ><d ><f ><c ><b ><4 ><b ><0 ><6 ><8 ><9 ><f ><b ><a ><e ><f ><a ><d ><5 ><e ><1 ><8 ><7 ><5 ><4 >
     # < g  >< E  >< 8  >< _  >< y  >< N  >< _  >< L  >< S  >< w  >< a  >< J  >< -  >< 6  >< 7  >< 6  >< 1  >< e  >< G  >< H  >< V  >< A  >
     uuid_ = uuid.UUID('{804f3fc8-dfcb-4b06-89fb-aefad5e18754}')
-    expectedSlug = b'gE8_yN_LSwaJ-6761eGHVA'
+    expectedSlug = 'gE8_yN_LSwaJ-6761eGHVA'
     actualSlug = slugid.encode(uuid_)
 
     assert expectedSlug == actualSlug, "UUID not correctly encoded into slug: '" + \
@@ -156,7 +156,7 @@ def spreadTest(generator, expected):
     # iterations, no failure occurred in 1000 simulations, so 64 * 40 should be
     # suitably large to rule out false positives.
     for i in range(0, 64 * 40):
-        slug = generator()
+        slug = generator().encode('ascii')
         assert len(slug) == 22
         for j in range(0, 22):
             if slug[j] in k[j]:
