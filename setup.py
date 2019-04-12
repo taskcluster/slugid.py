@@ -36,4 +36,9 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.5',
     ),
+    project_urls={
+        'Homepage': 'http://taskcluster.github.io/slugid.py',
+        'Source': 'https://github.com/taskcluster/slugid.py',
+    },
+
 )
