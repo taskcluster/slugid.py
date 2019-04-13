@@ -1,7 +1,7 @@
 slugid.py - Compressed UUIDs for python
 =======================================
 
-.. image:: https://tools.taskcluster.net/lib/assets/taskcluster-120.png
+.. image:: https://media.taskcluster.net/lib/assets/taskcluster-120.png
 
 |Build Status| |Coverage Status| |License| |pypi Version| |Downloads|
 
